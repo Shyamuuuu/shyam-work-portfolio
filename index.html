@@ -25,8 +25,8 @@
     <div class="nav__inner">
       <a class="nav__logo" href="#">SS</a>
       <ul class="nav__links">
-        <li><a href="#about">About</a></li>
         <li><a href="#skills">Skills</a></li>
+        <li><a href="#about">About</a></li>
         <li><a href="#experience">Experience</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -85,48 +85,25 @@
       </div>
     </header>
 
-    <section id="about" class="section reveal">
+    <section id="skills" class="section skills-section reveal" aria-labelledby="skills-title">
       <div class="section__header">
-        <span class="section__label">About Me</span>
-        <h2>Quality-first mindset, builder at heart</h2>
-      </div>
-      <div class="about-card">
-        <p>
-          I'm a QA Lead with 5+ years of experience in Agile QA environments, specializing in manual and
-          API testing with hands-on Playwright automation. At The Ninja Studio, I work remotely to drive
-          end-to-end quality, build scalable Page Object Model frameworks, and mentor 4+ junior QA engineers.
-          I've automated 50+ tests with Playwright and JavaScript, increased regression coverage by 30%, and
-          collaborated on 50+ sprint releases with zero critical production defects. My work centers on test
-          scenario design, defect management, and continuous improvement, supported by AI-assisted testing
-          using Claude. I'm also learning GitHub Actions for CI/CD regression testing.
-        </p>
-        <ul class="about-tags" aria-label="Interests">
-          <li>Manual Testing</li>
-          <li>API Testing</li>
-          <li>Playwright Automation</li>
-          <li>QA Leadership</li>
-          <li>GitHub Actions (Learning)</li>
-          <li>Agile Teams</li>
-          <li>Remote Collaboration</li>
-          <li>AI-Assisted QA</li>
-          <li>Mentoring</li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="skills" class="section reveal">
-      <div class="section__header">
-        <span class="section__label">Skills</span>
-        <h2>What I bring to the table</h2>
+        <span class="section__label">Core expertise</span>
+        <h2 id="skills-title">What I bring to the table</h2>
+        <p class="skills-section__intro">Playwright automation at the core. Manual testing, API validation, and QA leadership behind every release.</p>
       </div>
       <ul class="skills-grid">
         <li class="skill-card skill-card--accent skill-card--featured">
-          <span class="skill-card__badge">Playwright</span>
+          <span class="skill-card__badge">Primary focus</span>
           <span class="skill-card__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
           </span>
           <h3>Playwright Automation</h3>
-          <p>50+ automated tests with JavaScript, 30% more regression coverage, and scalable POM frameworks with 40% better reusability.</p>
+          <p>Reliable regression testing with Playwright &amp; JavaScript, built on reusable Page Object Model frameworks.</p>
+          <dl class="skill-card__metrics" aria-label="Playwright achievements">
+            <div><dt>Automated tests</dt><dd>50+</dd></div>
+            <div><dt>More regression coverage</dt><dd>30%</dd></div>
+            <div><dt>Better framework reusability</dt><dd>40%</dd></div>
+          </dl>
         </li>
         <li class="skill-card skill-card--ai">
           <span class="skill-card__badge skill-card__badge--ai">AI-Assisted</span>
@@ -186,6 +163,35 @@
         <li>Slack</li>
         <li>Google Meet</li>
       </ul>
+    </section>
+
+    <section id="about" class="section reveal">
+      <div class="section__header">
+        <span class="section__label">About Me</span>
+        <h2>Quality-first mindset, builder at heart</h2>
+      </div>
+      <div class="about-card">
+        <p>
+          I'm a QA Lead with 5+ years of experience in Agile QA environments, specializing in manual and
+          API testing with hands-on Playwright automation. At The Ninja Studio, I work remotely to drive
+          end-to-end quality, build scalable Page Object Model frameworks, and mentor 4+ junior QA engineers.
+          I've automated 50+ tests with Playwright and JavaScript, increased regression coverage by 30%, and
+          collaborated on 50+ sprint releases with zero critical production defects. My work centers on test
+          scenario design, defect management, and continuous improvement, supported by AI-assisted testing
+          using Claude. I'm also learning GitHub Actions for CI/CD regression testing.
+        </p>
+        <ul class="about-tags" aria-label="Interests">
+          <li>Manual Testing</li>
+          <li>API Testing</li>
+          <li>Playwright Automation</li>
+          <li>QA Leadership</li>
+          <li>GitHub Actions (Learning)</li>
+          <li>Agile Teams</li>
+          <li>Remote Collaboration</li>
+          <li>AI-Assisted QA</li>
+          <li>Mentoring</li>
+        </ul>
+      </div>
     </section>
 
     <section id="experience" class="section reveal">

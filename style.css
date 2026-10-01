@@ -646,6 +646,36 @@ main {
 }
 
 /* Skills */
+.section {
+  scroll-margin-top: calc(var(--nav-height) + var(--space-4));
+}
+
+.skills-section {
+  background: linear-gradient(180deg, var(--color-primary-soft), var(--color-bg));
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.skills-section .section__header h2 {
+  font-size: clamp(2rem, 4.5vw, 2.75rem);
+  max-width: 22ch;
+}
+
+.skills-section__intro {
+  margin-top: var(--space-4);
+  max-width: 60ch;
+  font-size: 1.0625rem;
+  color: var(--color-text-secondary);
+}
+
+.skills-section .skill-card h3 {
+  padding-right: 0;
+}
+
+.skills-section .skill-card p {
+  font-size: 1rem;
+}
+
 .skills-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -679,8 +709,61 @@ main {
 }
 
 .skill-card--featured {
+  grid-column: 1 / -1;
+  padding: var(--space-8);
   border-width: 2px;
+  border-color: var(--color-accent);
   box-shadow: var(--shadow-md);
+}
+
+.skills-section .skill-card--featured h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  margin-bottom: var(--space-3);
+}
+
+.skill-card--featured > p {
+  max-width: 60ch;
+}
+
+.skill-card__metrics {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  margin: var(--space-6) 0 0;
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-border);
+}
+
+.skill-card__metrics > div {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: var(--space-1);
+}
+
+.skill-card__metrics dt {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}
+
+.skill-card__metrics dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-text);
+}
+
+.skills-section .skill-card__badge {
+  color: var(--color-text);
+  background: var(--color-accent-soft);
+  border: 1px solid var(--color-accent);
+  font-size: 0.75rem;
+}
+
+.skills-section .skill-card__badge--ai {
+  background: var(--color-ai-soft);
+  border-color: var(--color-ai);
 }
 
 .skill-card--ai {
@@ -746,6 +829,10 @@ main {
 }
 
 @media (min-width: 640px) {
+  .skill-card__metrics {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .skills-grid {
     grid-template-columns: repeat(2, 1fr);
   }
