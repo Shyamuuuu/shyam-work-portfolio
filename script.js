@@ -3,18 +3,11 @@ const revealElements = document.querySelectorAll(".reveal");
 
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-/* CSS moves the labels; JavaScript only controls playback and visibility. */
+/* CSS moves the labels; JavaScript pauses them while the orbit is offscreen. */
 const skillsOrbit = document.querySelector(".skills-orbit");
-const orbitToggle = document.querySelector(".skills-orbit__toggle");
 
-if (skillsOrbit && orbitToggle) {
+if (skillsOrbit) {
   skillsOrbit.classList.add("is-animated");
-  orbitToggle.hidden = false;
-
-  orbitToggle.addEventListener("click", () => {
-    const paused = skillsOrbit.classList.toggle("is-paused");
-    orbitToggle.querySelector("span").textContent = paused ? "Resume animation" : "Pause animation";
-  });
 
   const orbitObserver = new IntersectionObserver(([entry]) => {
     skillsOrbit.classList.toggle("is-offscreen", !entry.isIntersecting);
