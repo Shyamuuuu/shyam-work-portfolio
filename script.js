@@ -3,6 +3,25 @@ const revealElements = document.querySelectorAll(".reveal");
 
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+/* CSS moves the labels; JavaScript only controls playback and visibility. */
+const skillsOrbit = document.querySelector(".skills-orbit");
+const orbitToggle = document.querySelector(".skills-orbit__toggle");
+
+if (skillsOrbit && orbitToggle) {
+  skillsOrbit.classList.add("is-animated");
+  orbitToggle.hidden = false;
+
+  orbitToggle.addEventListener("click", () => {
+    const paused = skillsOrbit.classList.toggle("is-paused");
+    orbitToggle.querySelector("span").textContent = paused ? "Resume animation" : "Pause animation";
+  });
+
+  const orbitObserver = new IntersectionObserver(([entry]) => {
+    skillsOrbit.classList.toggle("is-offscreen", !entry.isIntersecting);
+  });
+  orbitObserver.observe(skillsOrbit);
+}
+
 function onScroll() {
   nav.classList.toggle("nav--scrolled", window.scrollY > 8);
 }

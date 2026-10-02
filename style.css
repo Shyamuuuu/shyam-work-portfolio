@@ -445,9 +445,16 @@ main {
 
 .hero__content {
   position: relative;
-  max-width: var(--max-width);
+  display: grid;
+  align-items: center;
+  gap: var(--space-12);
+  max-width: 80rem;
   margin: 0 auto;
   width: 100%;
+}
+
+.hero__intro {
+  min-width: 0;
 }
 
 .hero__eyebrow {
@@ -600,6 +607,7 @@ main {
 }
 
 .hero__stat dd {
+  margin: 0;
   font-family: var(--font-display);
   font-size: 1.25rem;
   font-weight: 700;
@@ -609,6 +617,331 @@ main {
 @media (min-width: 480px) {
   .hero__stats {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Upright labels follow two circular paths; the detailed skills stay below. */
+.skills-orbit {
+  width: 100%;
+  max-width: 37.5rem;
+  min-width: 0;
+  margin: 0 auto;
+  container-type: inline-size;
+}
+
+.skills-orbit__heading {
+  text-align: center;
+}
+
+.skills-orbit__eyebrow {
+  color: var(--color-primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.skills-orbit__heading h2 {
+  margin-top: var(--space-2);
+  font-family: var(--font-display);
+  font-size: 1.375rem;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+}
+
+.skills-orbit__stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  margin: var(--space-4) 0;
+  isolation: isolate;
+  background: radial-gradient(circle, var(--color-primary-soft), transparent 68%);
+}
+
+.skills-orbit__guide {
+  position: absolute;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.skills-orbit__guide--outer {
+  inset: 9%;
+  border-style: dashed;
+}
+
+.skills-orbit__guide--inner {
+  inset: 29%;
+  border-color: var(--color-primary);
+  opacity: 0.25;
+}
+
+.skills-orbit__core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 19%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border: 1px solid var(--color-accent);
+  border-radius: 50%;
+  background: var(--color-surface);
+  box-shadow: 0 0 0 8px var(--color-accent-soft), var(--shadow-md);
+}
+
+.skills-orbit__core svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-bottom: var(--space-1);
+  color: var(--color-accent);
+}
+
+.skills-orbit__core strong {
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  letter-spacing: -0.03em;
+}
+
+.skills-orbit__core > span {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+}
+
+.skills-orbit__ring {
+  --orbit-radius: 41cqw;
+  --orbit-duration: 110s;
+  --orbit-direction: normal;
+  position: absolute;
+  inset: 0;
+}
+
+.skills-orbit__ring--expertise {
+  --orbit-radius: 21cqw;
+  --orbit-duration: 85s;
+  --orbit-direction: reverse;
+}
+
+.skills-orbit__item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 18cqw;
+  min-height: 3rem;
+  padding: 0.375rem 0.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: center;
+  transform: translate(-50%, -50%) rotate(var(--angle)) translateX(var(--orbit-radius)) rotate(calc(-1 * var(--angle)));
+}
+
+.skills-orbit__ring--expertise .skills-orbit__item {
+  width: 17.5cqw;
+  border-color: var(--color-primary);
+  background: var(--color-primary-soft);
+}
+
+.skills-orbit__ring .skills-orbit__item--ai {
+  border-color: var(--color-ai);
+  background: var(--color-ai-soft);
+}
+
+.skills-orbit__item small {
+  display: block;
+  margin-top: 0.125rem;
+  color: var(--color-text-secondary);
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+
+.skills-orbit.is-animated .skills-orbit__item {
+  animation: skills-orbit-turn var(--orbit-duration) linear infinite var(--orbit-direction);
+  animation-play-state: running;
+}
+
+.skills-orbit.is-paused .skills-orbit__item,
+.skills-orbit.is-offscreen .skills-orbit__item {
+  animation-play-state: paused;
+}
+
+@media (hover: hover) {
+  .skills-orbit__stage:hover .skills-orbit__item {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes skills-orbit-turn {
+  from {
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(var(--orbit-radius)) rotate(calc(-1 * var(--angle)));
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(calc(var(--angle) + 360deg)) translateX(var(--orbit-radius)) rotate(calc(-1 * var(--angle) - 360deg));
+  }
+}
+
+.skills-orbit__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2) var(--space-4);
+  color: var(--color-text-secondary);
+  font-size: 0.75rem;
+}
+
+.skills-orbit__toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 2.75rem;
+  padding: var(--space-2) var(--space-3);
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color var(--transition), background-color var(--transition);
+}
+
+.skills-orbit__toggle:hover {
+  background: var(--color-primary-soft);
+  border-color: var(--color-primary);
+}
+
+.skills-orbit__toggle:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+.skills-orbit__toggle svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.skills-orbit__toggle[hidden],
+.skills-orbit__play-icon,
+.skills-orbit.is-paused .skills-orbit__pause-icon {
+  display: none;
+}
+
+.skills-orbit.is-paused .skills-orbit__play-icon {
+  display: block;
+}
+
+@media (min-width: 1100px) {
+  .hero__content {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
+    gap: var(--space-8);
+  }
+
+  .hero__subtitle {
+    font-size: 1.0625rem;
+  }
+
+  .hero__actions {
+    gap: var(--space-3);
+  }
+
+  .hero__actions .btn {
+    padding-inline: var(--space-4);
+  }
+}
+
+/* On narrow screens, keep expertise in orbit and give every tool room to read. */
+@container (max-width: 529px) {
+  .skills-orbit__stage {
+    aspect-ratio: auto;
+    padding-top: 100%;
+  }
+
+  .skills-orbit__guide--outer {
+    display: none;
+  }
+
+  .skills-orbit__guide--inner {
+    inset: auto;
+    top: 17cqw;
+    left: 17%;
+    width: 66%;
+    height: 66cqw;
+  }
+
+  .skills-orbit__core {
+    top: 50cqw;
+    width: 29%;
+  }
+
+  .skills-orbit__ring--expertise {
+    --orbit-radius: 33cqw;
+    height: 100cqw;
+    bottom: auto;
+  }
+
+  .skills-orbit__ring--expertise .skills-orbit__item {
+    width: 29cqw;
+    min-height: 3.25rem;
+  }
+
+  .skills-orbit__ring--tools {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-2);
+    padding-top: var(--space-4);
+  }
+
+  .skills-orbit.is-animated .skills-orbit__ring--tools .skills-orbit__item,
+  .skills-orbit__ring--tools .skills-orbit__item {
+    position: static;
+    width: auto;
+    transform: none;
+    animation: none;
+  }
+}
+
+@container (max-width: 300px) {
+  .skills-orbit__ring--expertise {
+    --orbit-radius: 36cqw;
+  }
+
+  .skills-orbit__guide--inner {
+    top: 14cqw;
+    left: 14%;
+    width: 72%;
+    height: 72cqw;
+  }
+
+  .skills-orbit__ring--expertise .skills-orbit__item {
+    width: 32cqw;
+    min-height: 3rem;
+  }
+
+  .skills-orbit__core {
+    width: 32%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skills-orbit.is-animated .skills-orbit__item {
+    animation: none;
+  }
+
+  .skills-orbit__toggle {
+    display: none;
   }
 }
 
@@ -626,23 +959,6 @@ main {
   line-height: 1.75;
   color: var(--color-text-secondary);
   max-width: 60ch;
-}
-
-.about-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
-  margin-top: var(--space-6);
-}
-
-.about-tags li {
-  padding: var(--space-2) var(--space-4);
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--color-text);
-  background: var(--color-surface-muted);
-  border: 1px solid var(--color-border);
-  border-radius: 999px;
 }
 
 /* Skills */
@@ -725,35 +1041,6 @@ main {
   max-width: 60ch;
 }
 
-.skill-card__metrics {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-6);
-  margin: var(--space-6) 0 0;
-  padding-top: var(--space-6);
-  border-top: 1px solid var(--color-border);
-}
-
-.skill-card__metrics > div {
-  display: flex;
-  flex-direction: column-reverse;
-  gap: var(--space-1);
-}
-
-.skill-card__metrics dt {
-  font-size: 0.875rem;
-  color: var(--color-text-secondary);
-}
-
-.skill-card__metrics dd {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: 2rem;
-  font-weight: 700;
-  line-height: 1.2;
-  color: var(--color-text);
-}
-
 .skills-section .skill-card__badge {
   color: var(--color-text);
   background: var(--color-accent-soft);
@@ -824,15 +1111,7 @@ main {
   line-height: 1.6;
 }
 
-.skills-toolbelt {
-  margin-top: var(--space-8);
-}
-
 @media (min-width: 640px) {
-  .skill-card__metrics {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
   .skills-grid {
     grid-template-columns: repeat(2, 1fr);
   }
