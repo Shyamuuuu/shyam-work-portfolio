@@ -3,6 +3,36 @@ const revealElements = document.querySelectorAll(".reveal");
 
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+/* Keep section links available on phones without crowding the header. */
+const menuToggle = document.getElementById("menuToggle");
+const primaryLinks = document.getElementById("primaryLinks");
+
+function closeMenu() {
+  nav.classList.remove("nav--menu-open");
+  menuToggle.setAttribute("aria-expanded", "false");
+  menuToggle.setAttribute("aria-label", "Open navigation");
+}
+
+menuToggle.addEventListener("click", () => {
+  const open = menuToggle.getAttribute("aria-expanded") !== "true";
+  nav.classList.toggle("nav--menu-open", open);
+  menuToggle.setAttribute("aria-expanded", String(open));
+  menuToggle.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
+});
+primaryLinks.addEventListener("click", (event) => {
+  if (event.target.closest("a")) closeMenu();
+});
+document.addEventListener("click", (event) => {
+  if (!nav.contains(event.target)) closeMenu();
+});
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && nav.classList.contains("nav--menu-open")) {
+    closeMenu();
+    menuToggle.focus();
+  }
+});
+window.matchMedia("(min-width: 768px)").addEventListener("change", closeMenu);
+
 /* CSS moves the labels; JavaScript pauses them while the orbit is offscreen. */
 const skillsOrbit = document.querySelector(".skills-orbit");
 
@@ -34,7 +64,7 @@ if (prefersReducedMotion) {
         }
       });
     },
-    { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+    { threshold: 0, rootMargin: "0px 0px -40px 0px" }
   );
 
   revealElements.forEach((el) => observer.observe(el));
